@@ -9,16 +9,17 @@ def fill_in_db(session_name, folder_name):
             with open (filename, 'r', encoding='utf-8') as f:
                 test_data_list = json.load(f) 
     for data in test_data_list:
-        # if data["model"].title() == "Publisher":
-        #     Publisher(name=data["fields"]["name"])
-        # elif data["model"].title() == "Book":
-        #     Book(title=data["fielda"]["title"], id_publisher=data["fielda"]["id_publisher"])
-        # elif data["model"].title() == "Shop":
-        #     Shop(name=data["fields"]["name"])
-        # elif data["model"].title() == "Stock":
-        #     Stock(id_shop=data["fielda"]["id_shop"], id_book=data["fielda"]["id_book"], count=data["fielda"]["count"])
-        # elif data["model"].title() == "Sale":
-        #     Sale(price=data["fielda"]["price"], sale_date=data["fielda"]["date_sale"], count=data["fielda"]["count"], id_stock=data["fielda"]["id_stock"])
+        # if data["model"] == "publisher":
+        #     new_line = Publisher(id=data["pk"], name=data["fields"]["name"])
+        # if data["model"] == "book":
+        #     new_line = Book(id=data["pk"], title=data["fields"]["title"], id_publisher=data["fields"]["id_publisher"])
+        # if data["model"] == "shop":
+        #     new_line = Shop(id=data["pk"], name=data["fields"]["name"])
+        # if data["model"] == "stock":
+        #     new_line = Stock(id=data["pk"], id_shop=data["fields"]["id_shop"], id_book=data["fields"]["id_book"], count=data["fields"]["count"])
+        # if data["model"] == "sale":
+        #     new_line = Sale(id=data["pk"], price=data["fields"]["price"], date_sale=data["fields"]["date_sale"], count=data["fields"]["count"], id_stock=data["fields"]["id_stock"])
+        # session_name.add(new_line)
         model = {
             'publisher': Publisher,
             'shop': Shop,
@@ -26,6 +27,6 @@ def fill_in_db(session_name, folder_name):
             'stock': Stock,
             'sale': Sale,
         }[data.get('model')]
-        session_name.add(model(id=data.get('pk'), **data.get('fields')))          
+        session_name.add(model(id=data.get('pk'), **data.get('fields')))
     return session_name.commit()
 
